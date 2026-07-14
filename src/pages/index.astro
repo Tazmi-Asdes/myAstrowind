@@ -1,7 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
 import Features from '~/components/widgets/Features.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Features2 from '~/components/widgets/Features2.astro';
@@ -15,7 +15,10 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
-  <Hero>
+  <Hero2
+    isReversed
+    image={{ src: '~/assets/images/tazmi.jpg', alt: 'Tazmi 头像', class: 'mx-auto rounded-full w-48 h-48 lg:w-64 lg:h-64 object-cover' }}
+  >
     <Fragment slot="title">
       林子航 <span class="text-accent dark:text-white">Tazmi</span>
     </Fragment>
@@ -23,7 +26,7 @@ const metadata = {
     <Fragment slot="subtitle">
       <span class="font-semibold">技术爱好者</span> · 服务器运维 · 后端开发 · 开源
     </Fragment>
-  </Hero>
+  </Hero2>
 
   <!-- 技术栈 Widget *************** -->
 
