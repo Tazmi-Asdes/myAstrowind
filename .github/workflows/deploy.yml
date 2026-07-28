@@ -1,0 +1,24 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 部署到服务器
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/astrowind
+            git pull origin main
+            npm install
+            npm run build
+            sudo rm -rf ${{ secrets.DEPLOY_PATH }}/*
+            sudo cp -r ~/astrowind/dist/* ${{ secrets.DEPLOY_PATH }}/
+            echo " 部署完成！"
