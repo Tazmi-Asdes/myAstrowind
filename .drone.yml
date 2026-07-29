@@ -12,10 +12,10 @@ steps:
       - pnpm run build
       - cp -r dist/* /opt/1panel/apps/openresty/openresty/www/sites/tazmi.online/index/
     volumes:
-      - /opt/1panel/apps/openresty/openresty/www/sites/tazmi.online/index/:/opt/1panel/apps/openresty/openresty/www/sites/tazmi.online/index/
+      - name: website
+        path: /opt/1panel/apps/openresty/openresty/www/sites/tazmi.online/index/
 
-trigger:
-  branch:
-    - main
-  event:
-    - push
+volumes:
+  - name: website
+    host:
+      path: /opt/1panel/apps/openresty/openresty/www/sites/tazmi.online/index/
