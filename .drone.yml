@@ -1,0 +1,21 @@
+kind: pipeline
+type: docker
+name: deploy
+
+steps:
+  - name: 构建和部署
+    image: node:20-alpine
+    commands:
+      - apk add git
+      - npm install -g pnpm
+      - pnpm install
+      - pnpm run build
+      - cp -r dist/* /opt/1panel/apps/openresty/openresty/www/sites/tazmi.online/index/
+    volumes:
+      - /opt/1panel/apps/openresty/openresty/www/sites/tazmi.online/index/:/opt/1panel/apps/openresty/openresty/www/sites/tazmi.online/index/
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
