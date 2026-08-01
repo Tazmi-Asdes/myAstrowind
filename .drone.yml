@@ -40,6 +40,7 @@ steps:
     pull: always
     commands:
       - npm install -g pnpm
+      - pnpm config set store-dir /drone/src/.pnpm-store
       - pnpm install --frozen-lockfile
     volumes:
       - name: pnpm-store
@@ -52,6 +53,8 @@ steps:
     image: node:22-alpine
     pull: always
     commands:
+      - npm install -g pnpm
+      - pnpm config set store-dir /drone/src/.pnpm-store
       - pnpm run build
     volumes:
       - name: pnpm-store
