@@ -52,7 +52,7 @@ steps:
     image: alpine:latest
     pull: always
     commands:
-      - echo "部署完成！时间: $(date)"
+      - echo "部署完成"
     when:
       status:
         include:
