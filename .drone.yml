@@ -2,25 +2,40 @@ kind: pipeline
 type: docker
 name: deploy
 
+# ============================================================
+# 触发条件
+# main 分支的 push 事件 + Web 界面手动触发
+# ============================================================
 trigger:
   branch:
     - main
   event:
     - push
+    - custom
 
+# 浅克隆，加快拉取速度
 clone:
   depth: 1
 
+# 同一 pipeline 同时只允许一个构建，避免部署冲突
+concurrency:
+  limit: 1
+
 steps:
-  - name: 检查环境版本
+  # ----------------------------------------------------------
+  # 1. 检查构建环境版本
+  # ----------------------------------------------------------
+  - name: 环境检查
     image: node:22-alpine
     pull: always
     commands:
       - node -v
       - npm -v
-      - apk add git
 
-  - name: 安装项目依赖
+  # ----------------------------------------------------------
+  # 2. 安装项目依赖
+  # ----------------------------------------------------------
+  - name: 安装依赖
     image: node:22-alpine
     pull: always
     commands:
@@ -30,6 +45,9 @@ steps:
       - name: pnpm-store
         path: /drone/src/.pnpm-store
 
+  # ----------------------------------------------------------
+  # 3. 构建项目
+  # ----------------------------------------------------------
   - name: 构建项目
     image: node:22-alpine
     pull: always
@@ -39,6 +57,9 @@ steps:
       - name: pnpm-store
         path: /drone/src/.pnpm-store
 
+  # ----------------------------------------------------------
+  # 4. 部署到生产服务器
+  # ----------------------------------------------------------
   - name: 部署到服务器
     image: node:22-alpine
     pull: always
@@ -48,16 +69,33 @@ steps:
       - name: website
         path: /opt/1panel/apps/openresty/openresty/www/sites/tazmi.online/index/
 
+  # ----------------------------------------------------------
+  # 5. 成功通知
+  # ----------------------------------------------------------
   - name: 发送通知
     image: alpine:latest
     pull: always
     commands:
-      - echo "部署完成"
+      - echo "部署完成！"
     when:
       status:
-        include:
-          - success
+        - success
 
+  # ----------------------------------------------------------
+  # 6. 失败通知
+  # ----------------------------------------------------------
+  - name: 失败通知
+    image: alpine:latest
+    pull: always
+    commands:
+      - echo "部署失败，请检查 Drone 构建日志"
+    when:
+      status:
+        - failure
+
+# ============================================================
+# 持久化卷
+# ============================================================
 volumes:
   - name: pnpm-store
     host:
