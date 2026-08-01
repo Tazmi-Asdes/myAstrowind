@@ -55,7 +55,8 @@ steps:
       - echo "部署完成！时间: $(date)"
     when:
       status:
-        - success
+        include:
+          - success
 
 volumes:
   - name: pnpm-store
