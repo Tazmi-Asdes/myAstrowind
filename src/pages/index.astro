@@ -24,7 +24,7 @@ const metadata = {
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="font-semibold">技术爱好者</span> · 服务器运维 · 后端开发 · 开源
+      <span class="font-semibold">运维实践者</span> · 服务器管理 · CI/CD · 基础设施
     </Fragment>
   </Hero2>
 
@@ -33,34 +33,34 @@ const metadata = {
   <Features
     id="skills"
     tagline="技能"
-    title="技术栈与工具"
+    title="运维实践方向"
     items={[
       {
-        title: '服务器运维',
-        description: '熟悉 Linux 系统管理与维护，掌握 Docker、Kubernetes 容器化技术，具备生产环境运维经验。',
+        title: '服务器管理',
+        description: '熟练使用 1Panel 进行服务器运维，掌握 Linux 系统管理、Nginx/OpenResty 配置、防火墙策略与 DDNS 动态域名解析。独立完成从系统安装到服务上线的全流程。',
         icon: 'tabler:server',
       },
       {
-        title: '后端开发',
-        description: '使用 Java、Spring Boot 进行后端服务开发，熟悉 RESTful API 设计、微服务架构与数据库管理。',
-        icon: 'tabler:code',
-      },
-      {
-        title: '自动化与 CI/CD',
-        description: '掌握 GitHub Actions、Jenkins 等 CI/CD 工具，善于构建自动化部署流水线。',
+        title: 'CI/CD 流水线',
+        description: '搭建 Drone CI 自动化部署系统，实现代码推送即自动构建部署。解决过 YAML 解析、容器隔离、锁文件缺失等实际故障，具备完整的 CI/CD 排障经验。',
         icon: 'tabler:refresh',
       },
       {
-        title: '开源贡献',
-        description: '积极参与开源社区，关注云原生技术生态，乐于分享技术实践与经验。',
-        icon: 'tabler:heart',
+        title: '容器化与基础设施',
+        description: '掌握 Docker 容器化部署与管理，熟悉 Docker Compose 多容器编排。使用 Alpine 镜像优化 CI 构建环境，通过 Volume 卷实现构建产物与站点目录的数据同步。',
+        icon: 'tabler:box',
+      },
+      {
+        title: '问题定位与排障',
+        description: '善于从日志与报错信息中定位根因，积累了大量实操经验：显卡驱动兼容性、IPv6 防火墙规则、Docker 日志清理、cron 定时任务等。',
+        icon: 'tabler:search',
       },
     ]}
   />
 
   <!-- 博客 Widget ******************* -->
 
-  <BlogLatestPosts title="最新文章" information="记录项目实践中的技术探索与心得。" />
+  <BlogLatestPosts title="最新文章" information="记录服务器运维、CI/CD 自动化与基础设施搭建的实践过程。" />
 
   <!-- 联系方式 Widget ************** -->
 

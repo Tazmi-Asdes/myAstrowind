@@ -9,7 +9,7 @@ metadata:
   title:
     default: MyBlog
     template: '%s — MyBlog'
-  description: 'Tazmi 的个人博客，记录项目实践与技术探索。'
+  description: 'Tazmi 的运维实践博客，记录服务器管理、CI/CD 自动化与基础设施搭建的真实过程。'
   robots:
     index: true
     follow: true
