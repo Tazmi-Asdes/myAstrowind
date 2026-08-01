@@ -57,7 +57,6 @@ steps:
       status:
         - success
 
-# 定义共享卷
 volumes:
   - name: pnpm-store
     host:
